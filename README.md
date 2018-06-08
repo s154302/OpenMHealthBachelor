@@ -1,4 +1,6 @@
 # OmH Shim Handler
+##
+A demo of the program can be found at https://youtu.be/1HWkCbEUc3Q
 ## Installation
 The program can be found at https://github.com/s154302/OmH-ShimHandler. It requires Java 1.8 as well as an installation of Docker. Docker can be installed from https://docs.docker.com/docker-for-windows/install/ for windows and \\ https://docs.docker.com/docker-for-mac/install/ for Mac. 
 
