@@ -1,61 +1,10 @@
 # OmH Shim Handler
-## OmH DSU
-https://github.com/openmhealth/omh-dsu-ri
-### Set up User for OmH DSU
-Simple web application to be used for testing an OmH implementation.
+## Installation
+The program can be found at https://github.com/s154302/OmH-ShimHandler. It requires Java 1.8 as well as an installation of Docker. Docker can be installed from https://docs.docker.com/docker-for-windows/install/ for windows and \\ https://docs.docker.com/docker-for-mac/install/ for Mac. 
 
-When setting up omh-dsu-ri (the open mHealth database) you have to use the following command to build it in docker:
+Once docker has been installed a docker-machine needs to be set up. This can be done by running docker-machine in a shell. This program has primarily been tested using Windows Powershell, but should also work for other shells. Creating a machine can be done using the command \verb|docker-machine create [machine-name]|. Once set up, the machine environment might have to be initialised, to do this run \verb|docker-machine env [machine-name]| and follow the instructions. The machine should now be up and running. To check this use the command \verb|docker-machine ls| and check the status of the machine. 
 
-```
-docker-compose -f docker-compose-init-postgres.yml up -d
-```
-Then you will have to access the container to modify the postgres database. This is achieved with the following command.
-```
-docker exec -it omhdsuri_postgres_1 bash 
-```
-The next step is to login to the postgres omh database which contains user credentials. This is done by using the following command: 
-```
-psql -d omh -U postgres
-```
-A user should then be added using the following script: https://github.com/openmhealth/omh-dsu-ri/blob/master/resources/rdbms/common/oauth2-sample-data.sql .
+Once the machine is running it should be possible to run the shell script \newline\verb|docker-setup.sh| included here. This script will set up the  docker containers for both Shimmer and the data storage unit using docker compose, which should have been installed along with docker-machine. Before running this script, open it and ensure that the variables within are correct. These include the docker-machine's IP, which can be found using the ls command, the IP of the website this program is to be hosted on, this defaults to \verb|http://localhost:8080|, and the shim key of the provider you would like to retrieve data from along with client credentials for the application using this program. The program has currently only been tested for Nokia Health. However, it should be able to support any of the providers specified at https://github.com/openmhealth/shimmer. Finally it is possible to specify how often data should be synchronised, as explained in the document. 
 
-Now data can be added and accessed through the omh-webapp
-
-## Shimmer
-
-https://github.com/openmhealth/shimmer
-
-Make sure to have a docker machine running before attempting any of the below. 
-For this project the default docker machine was used.
-
-When building shimmer, make sure only to build the resource server, as the console uses same ports as OmH DSU resource server.
-This is done by running the command 
-```
-docker-compose up -d resourceserver
-```
-### Build Shimmer changes
-Make sure to have bower, grunt, and nodeJS installed.
-Run
-```
-./run-dockerized.sh
-```
-in a bash terminal in order to build. 
-If not making any changes simply set up docker as usual. 
-
-### Docker
-Create and run docker containers
-```
-docker-compose up -d
-```
-Remove docker containers
-```
-docker-compose down
-```
-View all current containers
-```
-docker ps -a
-```
-View all current machines
-```
-docker-machine ls
-```
+## Usage
+Once the program has been set up and is runnning, run the OmH shim handler application. This should be able to be compiled to a WAR file, and hosted anywhere. The current implementation hosts it on a Tomcat server, and contains a create user function, which takes a username and a password, and sets up a user for which data is synchronised. The create user button will redirect to the appropriate third party website and ask for authorisation. Once authorised it should redirect back to the web application. Once authorised the program should start synchronising data at the rate specified in the docker setup file. 
