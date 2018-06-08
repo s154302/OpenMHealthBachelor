@@ -1,0 +1,9 @@
+THread number 0 has started at 12:45:00
+THread number 1 has started at 12:45:00
+THread number 2 has started at 12:45:00
+THread number 3 has started at 12:45:00
+Total execution time: 17697
+Total execution time: 17764
+Total execution time: 18077
+Total execution time: 18103
+Total execution time for all threads : 18118

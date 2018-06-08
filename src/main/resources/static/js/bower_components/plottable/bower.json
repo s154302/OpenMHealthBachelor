@@ -1,0 +1,44 @@
+{
+  "name": "plottable",
+  "description": "A modular charting library built on D3",
+  "version": "2.9.0",
+  "main": [
+    "plottable.js",
+    "plottable.css"
+  ],
+  "typescript": {
+    "definition": "plottable.d.ts"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/*",
+    "!bower.json",
+    "!plottable.js",
+    "!plottable.css",
+    "!plottable.min.js",
+    "!plottable.d.ts"
+  ],
+  "keywords": [
+    "plottable",
+    "plottablejs",
+    "plottable.js",
+    "d3",
+    "data viz",
+    "chart",
+    "charts",
+    "reusable charts",
+    "visualization",
+    "scatterplot",
+    "bar chart",
+    "plot",
+    "plots"
+  ],
+  "dependencies": {
+    "d3": "^3.5.16"
+  },
+  "homepage": "http://plottablejs.org",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/palantir/plottable.git"
+  }
+}
